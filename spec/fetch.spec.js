@@ -172,7 +172,7 @@ describe('negative tests', function () {
             .then(function (result) {
                 fail('Expected promise to be rejected');
             }, function (err) {
-                expect(err.message.code).toBe(1);
+                expect(err.message.exitCode).toBe(1);
                 expect(err).toBeDefined();
             });
     }, 30000);
@@ -182,7 +182,7 @@ describe('negative tests', function () {
             .then(function (result) {
                 fail('Expected promise to be rejected');
             }, function (err) {
-                expect(err.message.code).toBe(1);
+                expect(err.message.exitCode).toBe(1);
                 expect(err).toBeDefined();
             });
     }, 30000);
