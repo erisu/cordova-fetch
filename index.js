@@ -15,9 +15,9 @@
  under the License.
  */
 
+const execa = require('execa');
 const pify = require('pify');
 const which = pify(require('which'));
-var superspawn = require('cordova-common').superspawn;
 var events = require('cordova-common').events;
 var path = require('path');
 var fs = require('fs-extra');
@@ -64,7 +64,7 @@ function installPackage (target, dest, opts) {
         .then(_ => npmArgs(target, opts))
         .then(args => {
             events.emit('verbose', `fetch: Installing ${target} to ${dest}`);
-            return superspawn.spawn('npm', args, { cwd: dest });
+            return execa('npm', args, { cwd: dest }).then(data => data.stdout);
         })
 
         // Resolve path to installed package
@@ -185,7 +185,7 @@ module.exports.uninstall = function (target, dest, opts) {
 
             // run npm uninstall, this will remove dependency
             // from package.json if --save was used.
-            return superspawn.spawn('npm', fetchArgs, opts);
+            return execa('npm', fetchArgs, opts);
         })
         .catch(function (err) {
             throw new CordovaError(err);
