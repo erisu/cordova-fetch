@@ -144,7 +144,6 @@ describe('fetching already installed packages', () => {
 
     it('should return package path if git repo name differs from plugin id', () => {
         const TARGET = `git+${pathToFileURL(path.resolve(__dirname, 'support/repo-name-neq-plugin-id.git'))}`;
-        console.log(`TARGET: ${TARGET}`);
         return Promise.resolve()
             .then(_ => fetchAndMatch(TARGET, { name: 'test-plugin' }))
             .then(_ => fetchAndMatch(TARGET, { name: 'test-plugin' }));
@@ -194,7 +193,6 @@ describe('fetching with node_modules in ancestor dirs', () => {
         // Copy test fixtures to avoid linking out of temp directory
         fs.cpSync(path.join(__dirname, 'support'), 'support', { recursive: true });
         fetchTarget = pathToFileURL(path.resolve('support/dummy-local-plugin')).href;
-        console.log(`fetchTarget: ${fetchTarget}`);
     });
 
     it('should still install to given destination', () => {
